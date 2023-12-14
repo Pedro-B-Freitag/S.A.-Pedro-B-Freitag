@@ -1,0 +1,643 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<!-- Bootstrap CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"
+		  rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi"
+		  crossorigin="anonymous">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link href="https://fonts.cdnfonts.com/css/sf-compact-display" rel="stylesheet">
+	<title>Cursos de Capacitação</title>
+	<style>
+        body {
+
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            background-color: #CAF0F8;
+            min-height: 100vh; /* Para ocupar pelo menos a altura total da viewport */
+        }
+        @import url('https://fonts.cdnfonts.com/css/sf-compact-display');
+
+
+        .btn{
+        	background-color: #030455;
+        	color: white;
+        }
+
+        .skills-container {
+          align-self: center;
+          justify-content: center;
+          padding: 6px 12px;
+          margin: 16px 0 0;
+        }
+
+        .skill {
+          display: block;
+          color: #0077B6;
+          border-radius: 2px;
+          background-color: rgba(0,166,194,.05);
+          border: 1px solid rgba(0,166,194,.15);
+          padding: 5px 8px;
+          font-size: clamp(1rem, 5vw, 2rem);
+          align-self: center;
+          justify-content: center;
+          text-align: center;
+          width: 152px;
+          height: 40px;
+        }
+
+        .row{
+        	margin-bottom: 200px;
+        	margin-top: 50px;
+        	width:100%;
+        	align-items: center;
+			justify-content : center;
+        }
+
+        .active {
+            background-color: green;
+            color: white;
+        }
+
+        .dropdown-container {
+            display: none;
+            background-color: #262626;
+            padding-left: 8px;
+        }
+
+        .fa-caret-down {
+            float: right;
+            padding-right: 8px;
+        }
+
+
+        .main {
+
+            margin-top: 60px;
+            font-size: 20px;
+            width: 100%;
+            margin-left: 10px;
+        }
+
+        .topnav {
+            position: fixed;
+            width: 100%;
+            overflow: hidden;
+            background-color: #CAF0F8;
+            box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.2);
+            z-index: 2; /* Set a higher value for z-index */
+        }
+
+        .topnav a {
+            float: left;
+            color: #000000;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .topnav a:hover {
+            background-color: #90E0EF;
+            color: black;
+        }
+
+        .topnav a.active {
+            background-color: #0077B6;
+            color: white;
+        }
+
+        .topnav a.split {
+            float: right;
+            background-color: #030455;
+            color: white;
+        }
+
+		.div-card{
+        	margin-right: 100px;
+        	box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .curso-card {
+            width: 250px;
+            margin: 20px;
+            text-align: center;
+            background: rgb(0,119,182);
+			background: linear-gradient(0deg, rgba(0,119,182,1) 0%, rgba(0,180,216,1) 80%);
+            height: 400px;
+            position: relative;
+        }
+
+		#parent {
+		  width: 100%;
+		  height: 830px;
+		  overflow-x: auto;
+		  display: flex;
+		  align-items: flex-start;
+		  margin-bottom: 90px;
+		}
+
+		#parent-categoria {
+		  width: 100%;
+		  height: 830px;
+		  overflow-x: auto;
+		  display: flex;
+		  align-items: flex-start;
+		}
+
+		.child {
+		  display: inline-block;
+		  width: 390px;
+		  height: 690px;
+		  margin-top: 50px;
+		  margin-left: 50px;
+
+
+		}
+
+		.child-categoria {
+		  display: inline-block;
+		  width: 390px;
+		  height: 690px;
+		  margin-top: 50px;
+		  margin-left: 50px;
+
+		}
+
+        .card{
+        	background-color: #CAF0F8;
+        	border: none;
+        	transition: transform .2s;
+        }
+
+        .card-img{
+       		width: 390px;
+  			height: 390px;
+        }
+
+        .card-subtitle{
+        	width: 310px;
+            height: 20px;
+            overflow: hidden;
+			text-overflow: ellipsis;
+            font-size: clamp(1rem, 1.5vw, 2rem);
+        }
+
+        .card:hover .overlay{
+			opacity: 0.80;
+		}
+		.overlay {
+		  position: absolute;
+		  top: 0;
+		  bottom: 0;
+		  left: 0;
+		  right: 0;
+		  height: 390px;
+		  width: 390px;
+		  opacity: 0;
+		  transition: .5s ease;
+		  background-color: #0077B6;
+		}
+
+
+
+        .imagem-tabela{
+        	width: 50px;
+  			height: 50px;
+        }
+
+        .imagem{
+			object-fit: cover;
+        }
+
+        .card:hover{
+        	background-color: #90E0EF;
+        	transform: scale(1.1);
+        }
+
+        .course-link {
+            text-decoration: none;
+            color: #000;
+        }
+
+        .card-body {
+            padding: 40px;
+            margin-top : 10px;
+            height: 300px;
+            width: 390px;
+        }
+
+
+        .card-title {
+			width: 310px;
+			height: 80px;
+			margin-bottom: 40px;
+			font-weight: bold;
+			color: black;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			font-size: clamp(1rem, 5vw, 2rem);
+		}
+
+        .card-text {
+			color: white;
+			font-size: 20px;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			padding: 20px;
+			-webkit-transform: translate(-50%, -50%);
+			-ms-transform: translate(-50%, -50%);
+			transform: translate(-50%, -50%);
+			text-align: center;
+			width: 390px;
+			height: 390px;
+        }
+
+        .d-flex justify-content-between align-items-center{
+        	position: absolute;
+  			bottom: 10px;
+        }
+
+
+
+        .btn-categoria {
+            border: none;
+            outline: 0;
+            padding: 12px;
+            color: #FFFFFF;
+            background-color: #030455;
+            text-align: center;
+            cursor: pointer;
+            width: 155px;
+            height: 155px;
+            font-size: 16px;
+            margin: 10px;
+            margin-bottom: 10px;
+            transition: transform .2s;
+        }
+
+        .btn-categoria:hover {
+        	background-color: #90E0EF;
+        	transform: scale(1.1);
+        	color: black;
+		}
+
+        .line-text {
+            color: #030455;
+            font-family: 'SF Compact Display';
+            font-weight: bold;
+            text-align: center;
+            font-size: 80px;
+            margin-top: 60px;
+            margin-bottom: 100px;
+        }
+
+        .espacamento {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .container {
+            overflow: hidden;
+            width: 100%;
+            max-width: none;
+
+        }
+
+        .filterDiv {
+        	display: inline-block;
+            display: none;
+            margin-right: 100px;
+        }
+
+        .show {
+            display: inline-block;
+        }
+
+        .btn:hover {
+            background-color: #CAF0F8;
+        }
+
+        .btn-categoria.active {
+            background-color: #90E0EF;
+            color: black;
+        }
+
+        .negrito{
+            font-weight: bold;
+            color: #CAF0F8;
+        }
+
+        @media screen and (max-width: 500px) {
+		  .navbar a {
+			float: none;
+			display: block;
+		  }
+		  /* width */
+		::-webkit-scrollbar {
+		  width: 10px;
+		}
+
+		/* Track */
+		::-webkit-scrollbar-track {
+		  background: #f1f1f1;
+		}
+
+		/* Handle */
+		::-webkit-scrollbar-thumb {
+		  background: #888;
+		}
+
+		/* Handle on hover */
+		::-webkit-scrollbar-thumb:hover {
+		  background: #555;
+		}
+		}
+
+		..auto-adjust-font-size {
+			overflow: hidden;
+			text-overflow: ellipsis;
+			max-height: 100%; /* Adjust this value as needed */
+			font-size: clamp(1rem, 5vw, 2rem); /* Set the initial font size using clamp for responsiveness */
+			line-height: 1.2; /* Set the line height */
+		}
+
+		..auto-adjust-font-size-fornecedor {
+			overflow: hidden;
+			text-overflow: ellipsis;
+			max-height: 100%; /* Adjust this value as needed */
+			font-size: clamp(1rem, 1.5vw, 2rem); /* Set the initial font size using clamp for responsiveness */
+			line-height: 1.2; /* Set the line height */
+		}
+    </style>
+</head>
+
+<body>
+
+
+<!--TOP NAV-->
+<div class="topnav">
+	<a href="/home"> <i class="fa fa-fw fa-home"></i></a>
+	<a href="/cursos/list">Cursos</a>
+	<div sec:authorize="hasRole('ROLE_ADMIN')">
+		<a href="/empresas/list">Empresas</a>
+	</div>
+	<div sec:authorize="hasRole('ROLE_ADMIN')">
+		<a href="/pessoas/list">Pessoas</a>
+	</div>
+	<a href="/vagas/list">Vagas de Emprego</a>
+	<div sec:authorize="isAnonymous()">
+		<a href="/fancy-login" class="split">Login</a>
+	</div>
+</div>
+
+<div class="main">
+	<div sec:authorize="hasRole('ROLE_ADMIN')">
+		<a th:href="@{/cursos/addImage}" class="btn bnt-primary btn-sm mb-3">
+			Adicionar Curso
+		</a>
+	</div>
+
+
+
+
+	<!-- TABELA DOS ADMINS -->
+	<div sec:authorize="hasRole('ROLE_ADMIN')">
+		<table class="table table-bordered table-striped">
+			<thead class="table-dark">
+			<tr>
+				<th>Nome do Curso</th>
+				<th>Categoria</th>
+				<th>Fornecedor </th>
+				<th>Imagem </th>
+				<th>ACOES</th>
+			</tr>
+			</thead>
+			<tbody>
+			<tr th:each="tempCurso : ${curso}" >
+
+				<td th:text="${tempCurso.nome}" />
+				<td th:text="${tempCurso.categoria}" />
+				<td th:text="${tempCurso.fornecedor}" />
+				<td><img class = "imagem-tabela  imagem" th:src="@{${'/cursos/display?imagemid=' + tempCurso.id}}" alt="Imagem do Curso"></td>
+				<td>
+					<a th:href="@{/cursos/updateImage(cursoid=${tempCurso.Id})}" class="btn btn-info btn-sm">
+						Update
+					</a>
+
+					<a th:href="@{/cursos/deletar(cursoid=${tempCurso.Id})}" class="btn btn-danger btn-sm"
+					   onclick="if(!(confirm('tem certeza que deseja excluir?'))) return false">
+						Deletar
+					</a>
+				</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
+
+
+
+
+	<div class='line-text'> Cursos </div>
+
+	<!-- CARDS MOSTRANDO TODOS -->
+	<div class="container">
+		<div id="parent">
+			<div class="child card col-12 col-sm-8 col-md-6 col-lg-4 div-card" th:each="tempCurso : ${curso}" th:attr="data-categoria=${tempCurso.categoria}">
+
+				<!-- Imagem -->
+				<img class="card-img imagem" th:src="@{${'/cursos/display?imagemid=' + tempCurso.id}}" alt="Imagem do Curso">
+
+				<div class="overlay">
+					<div class="card-text" th:text="${tempCurso.descricao}"></div>
+				</div>
+
+				<div class="card-body">
+
+					<!-- nome do curso -->
+					<h4 class="card-title auto-adjust-font-size" th:text="${tempCurso.nome}"></h4>
+
+					<!-- fornecedor -->
+					<h6 class="card-subtitle mb-2 text-muted auto-adjust-font-size-fornecedor" th:text="${tempCurso.fornecedor}"></h6>
+
+					<!-- descrição -->
+
+					<div class="d-flex justify-content-between align-items-center">
+						<!-- categoria -->
+						<div class="skills-container mt-4">
+							<div class="skill auto-adjust-font-size" th:text="${tempCurso.categoria}"> </div>
+						</div>
+						<a th:href="${tempCurso.url}" class="btn mt-3"> Ir ao Curso</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class='line-text' > Buscar por Categoria </div>
+	<div id="myBtnContainer">
+		<div class="row ">
+			<button class="btn-categoria " onclick="filterSelection('Programação', 'cardContainerCategoria')"> Programação</button>
+			<button class="btn-categoria"  onclick="filterSelection('Marketing Digital', 'cardContainerCategoria')"> Marketing Digital</button>
+			<button class="btn-categoria" onclick="filterSelection('Informática', 'cardContainerCategoria')"> Informática</button>
+			<button class="btn-categoria" onclick="filterSelection('Desenvolvimento Web', 'cardContainerCategoria')"> Desenvolvimento Web</button>
+			<button class="btn-categoria" onclick="filterSelection('Inglês', 'cardContainerCategoria')"> Inglês</button>
+			<button class="btn-categoria" onclick="filterSelection('Design Gráfico', 'cardContainerCategoria')"> Design Gráfico</button>
+			<button class="btn-categoria" onclick="filterSelection('Machine Learning', 'cardContainerCategoria')"> Machine Learning</button>
+			<button class="btn-categoria" onclick="filterSelection('Fotografia', 'cardContainerCategoria')"> Fotografia</button>
+			<button class="btn-categoria" onclick="filterSelection('Finanças Pessoais', 'cardContainerCategoria')"> Finanças Pessoais</button>
+			<button class="btn-categoria" onclick="filterSelection('Gerenciamento de Projetos', 'cardContainerCategoria')"> Gerenciamento de Projetos</button>
+			<button class="btn-categoria" onclick="filterSelection('Ciência de Dados', 'cardContainerCategoria')"> Ciência de Dados</button>
+			<button class="btn-categoria" onclick="filterSelection('Redes de Computadores', 'cardContainerCategoria')"> Redes de Computadores</button>
+			<button class="btn-categoria" onclick="filterSelection('Marketing de Mídias Sociais', 'cardContainerCategoria')"> Marketing de Mídias Sociais</button>
+			<button class="btn-categoria" onclick="filterSelection('Inteligência Artificial', 'cardContainerCategoria')"> Inteligência Artificial</button>
+			<button class="btn-categoria" onclick="filterSelection('Psicologia', 'cardContainerCategoria')"> Psicologia</button>
+		</div>
+	</div>
+
+	<p id="categoryNameDisplay" class='line-text'></p>
+	<!-- CARDS CATEGORIAS -->
+	<div class="container" id="cardContainerCategoria">
+		<div id="parent-categoria">
+			<div class="child-categoria card col-12 col-sm-8 col-md-6 col-lg-4 div-card filterDiv" th:each="tempCurso : ${curso}" th:attr="data-categoria=${tempCurso.categoria}">
+
+				<!-- Imagem -->
+				<img class="card-img imagem" th:src="@{${'/cursos/display?imagemid=' + tempCurso.id}}" alt="Imagem do Curso">
+				<div class="overlay">
+					<div class="card-text" th:text="${tempCurso.descricao}"></div>
+				</div>
+				<div class="card-body">
+
+					<!-- nome do curso -->
+					<h4 class="card-title auto-adjust-font-size" th:text="${tempCurso.nome}"></h4>
+
+					<!-- fornecedor -->
+					<h6 class="card-subtitle mb-2 text-muted auto-adjust-font-size-fornecedor" th:text="${tempCurso.fornecedor}"></h6>
+
+					<!-- descrição -->
+
+					<div class="d-flex justify-content-between align-items-center">
+						<!-- categoria -->
+						<div class="skills-container mt-4">
+							<div class="skill auto-adjust-font-size" th:text="${tempCurso.categoria}"> </div>
+						</div>
+						<a th:href="${tempCurso.url}" class="btn mt-3"> Ir ao Curso</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- -->
+
+
+	<script th:inline="javascript">
+		document.addEventListener('DOMContentLoaded', function () {
+
+		});
+
+		function filterSelection(categoria, containerId) {
+		var elements = document.getElementsByClassName('filterDiv');
+		var categoryNameDisplay = document.getElementById('categoryNameDisplay');
+
+		if (categoria === 'todos') {
+			for (var i = 0; i < elements.length; i++) {
+				elements[i].style.display = 'block';
+			}
+		} else {
+			for (var i = 0; i < elements.length; i++) {
+				var dataCategory = elements[i].getAttribute('data-categoria');
+				if (categoria === 'todos' || dataCategory === categoria) {
+					elements[i].style.display = 'block';
+				} else {
+					elements[i].style.display = 'none';
+				}
+			}
+		}
+
+		// Mostrar categoria
+		categoryNameDisplay.innerText = categoria;
+
+		// Romover classe 'active' dos botoes e colocar na categoria atual
+		var btns = document.getElementsByClassName('btn-categoria');
+		for (var i = 0; i < btns.length; i++) {
+			btns[i].classList.remove('active');
+		}
+
+		var currentBtn = document.querySelector('.btn-categoria[onclick="filterSelection(\'' + categoria + '\')"]');
+
+		scrollToContainer('cardContainerCategoria');
+
+		adjustFontSize();
+
+		adjustFontSizeFornecedor();
+
+		currentBtn.classList.add('active');
+
+
+	}
+
+	function scrollToContainer(containerId) {
+		var container = document.getElementById(containerId);
+		container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+	}
+
+	
+	</script>
+
+	<!-- Ajustar o tamanho da fonte do titulo e da categoria -->
+
+	<script th:inline="javascript">
+		document.addEventListener('DOMContentLoaded', function () {
+			adjustFontSize();
+		});
+
+		function adjustFontSize() {
+			var elements = document.getElementsByClassName('auto-adjust-font-size');
+
+			for (var i = 0; i < elements.length; i++) {
+				var element = elements[i];
+				while (element.scrollHeight > element.offsetHeight) {
+					var currentFontSize = parseFloat(window.getComputedStyle(element, null).getPropertyValue('font-size'));
+					element.style.fontSize = (currentFontSize - 1) + 'px';
+				}
+			}
+		}
+	</script>
+
+
+	<!-- Ajustar o tamanho da fonte do fornecedor -->
+
+	<script th:inline="javascript">
+		document.addEventListener('DOMContentLoaded', function () {
+			adjustFontSizeFornecedor();
+		});
+
+		function adjustFontSizeFornecedor() {
+			var elements = document.getElementsByClassName('auto-adjust-font-size-fornecedor');
+
+			for (var i = 0; i < elements.length; i++) {
+				var element = elements[i];
+				while (element.scrollHeight > element.offsetHeight) {
+					var currentFontSize = parseFloat(window.getComputedStyle(element, null).getPropertyValue('font-size'));
+					element.style.fontSize = (currentFontSize - 1) + 'px';
+				}
+			}
+		}
+	</script>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,244 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.cdnfonts.com/css/sf-compact-display" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+
+    <title>Home</title>
+
+    <style>
+
+        body {
+          margin: 0;
+          font-family: Arial, Helvetica, sans-serif;
+          background-color: #CAF0F8;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-around; /* Adjust this property based on your layout preferences */
+            align-items: center;
+            padding: 10%;
+            height: 100%;
+        }
+
+        .bem-vindo {
+            font-size: 29px;
+            color: #737373;
+            font-weight: bold;
+            margin-left: 10px; /* Adjust the left margin as needed */
+        }
+
+        .texto {
+            font-family: Arial;
+            font-size: 56px;
+            color: #030455;
+            font-weight: bold;
+            margin-left: 10px; /* Adjust the left margin as needed */
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: #030455;
+            color: white;
+            width: 290px;
+            height: 100px;
+            text-align: center;
+            line-height: 100px;
+            text-decoration: none;
+            font-family: Arial;
+            font-size: 21px;
+            font-weight: bold;
+            margin-bottom: 50px;
+            margin-top: 50px;
+        }
+
+
+        .btn:hover{
+        	background-color: #0077B6;
+        	color: black;
+
+        }
+
+
+
+        .topnav {
+
+            width: 100%;
+            overflow: hidden;
+            background-color: #CAF0F8;
+            box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.2);
+            z-index: 2; /* Set a higher value for z-index */
+        }
+
+        .topnav a {
+            float: left;
+            color: #000000;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .topnav a:hover, .dropdown:hover .dropbtn {
+            background-color: #90E0EF;
+            color: black;
+        }
+
+        .topnav a.active {
+            background-color: #0077B6;
+            color: white;
+        }
+
+        .topnav a.split {
+            float: right;
+            background-color: #030455;
+            color: white;
+        }
+
+        .dropdown {
+          float: left;
+          overflow: hidden;
+        }
+
+
+        .dropdown .dropbtn {
+          font-size: 16px;
+          border: none;
+          outline: none;
+          color: black;
+          padding: 14px 16px;
+          background-color: inherit;
+          font-family: inherit; /* Important for vertical align on mobile phones */
+          margin: 0; /* Important for vertical align on mobile phones */
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            background-color: #CAF0F8;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            right: 0;
+        }
+
+        .dropdown-content a {
+          float: none;
+          color: black;
+          padding: 12px 16px;
+          text-decoration: none;
+          display: block;
+          text-align: left;
+        }
+
+
+        .dropdown-content a:hover {
+          background-color: #90E0EF;
+        }
+
+        /* Show the dropdown menu on hover */
+        .dropdown:hover .dropdown-content {
+          display: block;
+        }
+
+        form {
+            display: inline-block; /* To make the form inline with the dropdown */
+        }
+
+        input[type="submit"] {
+
+            font-size: 16px;
+            border: none;
+            outline: none;
+            color: black;
+            padding: 12px 16px;
+            min-width: 160px;
+            background-color: #CAF0F8;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+
+        }
+
+        input[type="submit"]:hover {
+            background-color: #90E0EF;
+        }
+
+        .logout-dropdown {
+            float: right; /* Add this style to float the logout dropdown to the right */
+        }
+
+
+    </style>
+
+</head>
+<body  bgcolor="CAF0F8">
+
+
+
+    <title>HOME</title>
+
+
+    <div class="topnav">
+        <a href="/home"> <i class="fa fa-fw fa-home"></i></a>
+        <a href="/cursos/list">Cursos</a>
+        <div sec:authorize="hasRole('ROLE_ADMIN')">
+            <a href="/empresas/list">Empresas</a>
+        </div>
+        <div sec:authorize="hasRole('ROLE_ADMIN')">
+            <a href="/pessoas/list">Pessoas</a>
+        </div>
+        <a href="/vagas/list">Vagas de Emprego</a>
+        <div sec:authorize="isAnonymous()">
+            <a href="/fancy-login" class="split">Login</a>
+        </div>
+
+        <div sec:authorize="isAuthenticated()">
+            <div  class="logout-dropdown dropdown">
+                <button class="dropbtn ">
+                    <i class="fa fa-caret-down "></i>
+                </button>
+                <div class="dropdown-content logout-dropdown">
+                    <form class="dropdown-content" action="#" th:action = "@{/logout}" method = "POST">
+                        <input type="submit"  value = "Logout"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div>
+            <div class="bem-vindo"><p>BEM VINDO!</p></div>
+
+            <div class="texto">
+                <p>Plataforma Online</p>
+                <p>de Capacitação</p>
+                <p>e Empregabilidade</p>
+            </div>
+        </div>
+
+        <div >
+            <a href="/cursos/list" class="btn"> Capacitação</a>
+            <p></p>
+            <a href="/vagas/list" class="btn"> Empregabilidade</a>
+        </div>
+
+    </div>
+
+
+        <script src = "curso.js">
+        </script>
+
+</body>
+</html>
+    

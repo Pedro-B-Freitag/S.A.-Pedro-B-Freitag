@@ -1,0 +1,135 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+    <title>Cadastrar Vaga</title>
+
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            background-color: #CAF0F8;
+            min-height: 100vh; /* Para ocupar pelo menos a altura total da viewport */
+        }
+
+        .form-control{
+            background-color: #90E0EF;
+        }
+
+        .custom-select{
+            background-color: #90E0EF;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class ="container">
+
+    <p class="h4 mb-4"> Cadastrar Vaga</p>
+
+
+    <form action="#"  th:action="@{/vagas/save}"
+          th:object="${vaga}"
+          method="POST" >
+
+
+        <input type="hidden" th:field="*{id}">
+
+
+        <h2> Nome da Empresa </h2>
+
+
+
+
+        <select class="custom-select mb-4 w-25" id="dropDownList" th:field="*{empresa}" required>
+
+
+            <option value="0">Selecione uma Opção</option>
+
+
+            <option
+
+                    th:each="empresa : ${listempresa}"
+                    th:value="${empresa.id}"
+                    th:text="${empresa.nome}">
+
+            </option>
+        </select>
+
+
+
+
+        <h2> Data da Vaga </h2>
+        <input type="date" id="date" th:field="*{dataVaga}"
+               class="form-control mb-4 w-25" placeholder="Data da Vaga" required>
+
+        <h2> Data Prazo da Vaga </h2>
+        <input type="date"  th:field="*{dataPrazo}"
+               class="form-control mb-4 w-25" placeholder="Data Prazo da Vaga" required>
+
+
+
+        <h2> URL da Vaga </h2>
+        <input type="text" th:field="*{url}"
+               class="form-control mb-4 w-25" placeholder="URL da vaga"
+               maxlength="255" required>
+
+
+        <h2> Quantidade de Vagas </h2>
+        <input type="text" th:field="*{quantidade}"
+               class="form-control mb-4 w-25" placeholder="Quantidade de Vagas"
+               maxlength="10" required>
+
+
+
+        <h2> Cargo da Vaga </h2>
+        <input type="text" th:field="*{cargo}"
+               class="form-control mb-4 w-25" placeholder="Cargo da Vaga"
+               maxlength="100" required>
+
+        <h2> Categoria da Vaga </h2>
+
+
+            <select class="custom-select mb-4 w-25" th:field="*{categoria}" required>
+                <option value="0">Selecione a Categoria:</option>
+                <option value="Tecnologia da Informação">Tecnologia da Informação</option>
+                <option value="Saúde e Medicina">Saúde e Medicina</option>
+                <option value="Finanças e Contabilidade">Finanças e Contabilidade</option>
+                <option value="Marketing e Publicidade">Marketing e Publicidade</option>
+                <option value="Educação e Ensino">Educação e Ensino</option>
+                <option value="Engenharia">Engenharia</option>
+                <option value="Vendas e Atendimento ao Cliente">Vendas e Atendimento ao Cliente</option>
+                <option value="Recursos Humanos ">Recursos Humanos</option>
+                <option value="Artes e Entretenimento">Artes e Entretenimento</option>
+                <option value="Gestão de Projetos">Gestão de Projetos</option>
+                <option value="Consultoria">Consultoria</option>
+                <option value="Setor Alimentício">Setor Alimentício</option>
+                <option value="Mídia e Comunicação">Mídia e Comunicação</option>
+                <option value="Serviços Jurídicos">Serviços Jurídicos</option>
+                <option value="Ciência e Pesquisa">Ciência e Pesquisa</option>
+
+
+
+
+            </select>
+
+        <p></p>
+
+        <button type="submit" class="btn btn-info col-2">SALVAR</button>
+    </form>
+
+    <hr>
+
+</div>
+
+</body>
+
+</html>

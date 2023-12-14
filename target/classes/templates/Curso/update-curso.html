@@ -1,0 +1,113 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+  <title>Update Curso</title>
+
+  <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            display: flex;
+            background-color: #CAF0F8;
+            min-height: 100vh; /* Para ocupar pelo menos a altura total da viewport */
+        }
+
+        .form-control{
+            background-color: #90E0EF;
+        }
+
+        .custom-select{
+            background-color: #90E0EF;
+            margin-bottom: 24px;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class ="container">
+  <h3>Curso Directory</h3>
+  <hr>
+
+  <p class="h4 mb-4"> Cadastrar Curso</p>
+
+
+
+  <form action="#" th:action="@{/cursos/saveUpdate}" th:object="${curso}" method="POST" >
+
+
+    <input type="hidden" th:field="*{id}">
+
+
+    <h2> Nome do curso </h2>
+    <input type="text" th:field="*{nome}"
+           class="form-control mb-4 w-25" placeholder="Nome do curso"  maxlength="255" required>
+
+    <h2> Categoria do curso </h2>
+
+    <select class="custom-select mb-4 w-25" th:field="*{categoria}" required>
+      <option value="0">Selecione a Categoria:</option>
+      <option value="Programação">Programação</option>
+      <option value="Marketing Digital">Marketing Digital</option>
+      <option value="Informática">Informática</option>
+      <option value="Desenvolvimento Web">Desenvolvimento Web</option>
+      <option value="Inglês">Inglês</option>
+      <option value="Design Gráfico">Design Gráfico</option>
+      <option value="Machine Learning">Machine Learning</option>
+      <option value="Fotografia">Fotografia</option>
+      <option value="Finanças Pessoais">Finanças Pessoais</option>
+      <option value="Gerenciamento de Projetos">Gerenciamento de Projetos</option>
+      <option value="Ciência de Dados">Ciência de Dados</option>
+      <option value="Redes de Computadores">Redes de Computadores</option>
+      <option value="Marketing de Mídias Sociais">Marketing de Mídias Sociais</option>
+      <option value="Inteligência Artificial">Inteligência Artificial</option>
+      <option value="Psicologia">Psicologia</option>
+    </select>
+
+
+
+    <h2> Fornecedor do curso </h2>
+    <input type="text" th:field="*{fornecedor}"
+           class="form-control mb-4 w-25" placeholder="Fornecedor do curso" maxlength="255" required>
+
+
+    <h2> URL do curso </h2>
+    <input type="text" th:field="*{url}"
+           class="form-control mb-4 w-25" placeholder="URL do curso" maxlength="255" required>
+
+
+
+    <h2> Curso presencial? </h2>
+    <select class="custom-select mb-4 w-25" th:field="*{presencial}" required>
+
+      <option value="0">Selecione:</option>
+      <option value="S">Sim</option>
+      <option value="N">Não</option>
+
+    </select>
+
+
+
+    <h2> Descrição do curso </h2>
+    <textarea type="text" th:field="*{descricao}"
+              class="form-control mb-4 w-25" placeholder="Descricao do curso" maxlength="255" required></textarea>
+
+
+
+    <button type="submit" class="btn btn-info col-2">SALVAR</button>
+  </form>
+  <hr>
+
+</div>
+
+</body>
+
+</html>
