@@ -76,9 +76,9 @@ Configure um banco de dados de produção (MySQL) e ajuste as configurações de
 ## 🛠️ Construído com
 
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - O framework web usado
+* [IntelliJ IDEA Community Edition](https://www.jetbrains.com/idea/download/?section=windows) - IDE utilizada
 * [MYSQL Workbench](https://dev.mysql.com/downloads/workbench/) - Gerenciador de Banco de Dados
-* [ROME](https://rometools.github.io/rome/) - Usada para gerar RSS
+* [Spring Initialzr](https://start.spring.io) 
 
 ## 🖇️ Colaborando
 
