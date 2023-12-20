@@ -63,13 +63,21 @@ Navegue pela interface amigável para explorar as funcionalidades disponíveis. 
 
 ## 📦 Implantação
 
-Adicione notas adicionais sobre como implantar isso em um sistema ativo
+### 🌐 Configuração do Ambiente de Produção
+**Servidor Web:**
+
+Configure um servidor web adequado para hospedar a aplicação.
+Certifique-se de que o servidor tenha suporte para a linguagem de programação utilizada (Java).
+
+**Banco de Dados:**
+
+Configure um banco de dados de produção (MySQL) e ajuste as configurações de conexão na aplicação em: ***application.properties***.
 
 ## 🛠️ Construído com
 
 
 * [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - O framework web usado
-* [Maven](https://maven.apache.org/) - Gerente de Dependência
+* [MYSQL Workbench](https://dev.mysql.com/downloads/workbench/) - Gerenciador de Banco de Dados
 * [ROME](https://rometools.github.io/rome/) - Usada para gerar RSS
 
 ## 🖇️ Colaborando
