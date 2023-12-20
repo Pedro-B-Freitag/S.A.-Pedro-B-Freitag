@@ -51,7 +51,7 @@ Navegue pela interface amigável para explorar as funcionalidades disponíveis. 
 
 **🌆 Inserção de uma Empresa**
   - Vá para a seção de ***Empresas*** na plataforma.
-  - Insira uma vaga de empresa que fornecerá **[Vagas de Emprego](#-implanta%C3%A7%C3%A3o)**
+  - Insira uma vaga de empresa que fornecerá **[Vagas de Emprego](#-Busca%C3%A7%C3%A3o)**
  
     
 **💼 Busca por Vagas de Emprego:**
