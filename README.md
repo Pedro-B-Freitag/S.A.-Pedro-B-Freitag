@@ -51,7 +51,7 @@ Navegue pela interface amigável para explorar as funcionalidades disponíveis. 
 
 **🌆 Inserção de uma Empresa**
   - Vá para a seção de ***Empresas*** na plataforma.
-  - Insira uma vaga de empresa que fornecerá **[Vagas de Emprego](#-Busca%C3%A7%C3%A3o)**
+  - Insira uma vaga de empresa que fornecerá ***Vagas de Emprego***
  
     
 **💼 Busca por Vagas de Emprego:**
@@ -59,27 +59,7 @@ Navegue pela interface amigável para explorar as funcionalidades disponíveis. 
   - Insira uma vaga de emprego de uma plataforma já existente
   - Acesse a vaga de emprego através do botão ***Aplicar***
   - Utilize os filtros para encontrar vagas adequadas ao seu perfil.
-    
 
-## ⚙️ Executando os testes
-
-Explicar como executar os testes automatizados para este sistema.
-
-### 🔩 Analise os testes de ponta a ponta
-
-Explique que eles verificam esses testes e porquê.
-
-```
-Dar exemplos
-```
-
-### ⌨️ E testes de estilo de codificação
-
-Explique que eles verificam esses testes e porquê.
-
-```
-Dar exemplos
-```
 
 ## 📦 Implantação
 
@@ -87,7 +67,6 @@ Adicione notas adicionais sobre como implantar isso em um sistema ativo
 
 ## 🛠️ Construído com
 
-Mencione as ferramentas que você usou para criar seu projeto
 
 * [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - O framework web usado
 * [Maven](https://maven.apache.org/) - Gerente de Dependência
