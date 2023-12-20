@@ -64,14 +64,14 @@ Navegue pela interface amigável para explorar as funcionalidades disponíveis. 
 ## 📦 Implantação
 
 ### 🌐 Configuração do Ambiente de Produção
-**Servidor Web:**
+**1. Servidor Web:**
 
-Configure um servidor web adequado para hospedar a aplicação.
-Certifique-se de que o servidor tenha suporte para a linguagem de programação utilizada (Java).
+- Configure um servidor web adequado para hospedar a aplicação.
+- Certifique-se de que o servidor tenha suporte para a linguagem de programação utilizada (Java).
 
-**Banco de Dados:**
+**2. Banco de Dados:**
 
-Configure um banco de dados de produção (MySQL) e ajuste as configurações de conexão na aplicação em: ***application.properties***.
+- Configure um banco de dados de produção (MySQL) e ajuste as configurações de conexão na aplicação em: ***application.properties***.
 
 ## 🛠️ Construído com
 
