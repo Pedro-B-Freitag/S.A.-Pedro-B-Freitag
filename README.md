@@ -73,6 +73,13 @@ Navegue pela interface amigável para explorar as funcionalidades disponíveis. 
 - Acesse ***[Banco de Dados](https://github.com/Pedro-B-Freitag/S.A.-Pedro-B-Freitag/blob/main/Banco%20de%20Dados)*** para acessar o script de criação do banco de dados
 - Configure um banco de dados de produção (MySQL) e ajuste as configurações de conexão na aplicação em: ***application.properties***.
 
+## ❌ Limitações
+
+**🎨 Paleta de Cores**
+- A paleta de cores definida pelo P.O. limitou as cores que poderiam ser utilizadas no projeto, as quais, não incluiam a cor branca `#ffffff` ou preta `#000000` para o fundo do site
+- A cor de fundo utilizada para o site foi: `#CAF0F8`
+- A paleta incluia as cores: `#CAF0F8`, `#90E0EF`, `#00B4D8`, `#0077B6`, `#03045E`
+
 ## 🛠️ Construído com
 
 
