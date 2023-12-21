@@ -87,4 +87,6 @@ Navegue pela interface amigável para explorar as funcionalidades disponíveis. 
 * [MYSQL Workbench](https://dev.mysql.com/downloads/workbench/) - Gerenciador de Banco de Dados
 * [Spring Initialzr](https://start.spring.io) 
 
+## 🖋️ Sugestões
 
+- Sugestões de melhoras podem ser enviadas para o e-mail: pedrobosini9@gmail.com
