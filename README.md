@@ -70,7 +70,7 @@ Navegue pela interface amigável para explorar as funcionalidades disponíveis. 
 - Certifique-se de que o servidor tenha suporte para a linguagem de programação utilizada (Java).
 
 **2. Banco de Dados:**
-
+- Acesse ***[Banco de Dados](https://github.com/Pedro-B-Freitag/S.A.-Pedro-B-Freitag/blob/main/Banco%20de%20Dados)*** para acessar o script de criação do banco de dados
 - Configure um banco de dados de produção (MySQL) e ajuste as configurações de conexão na aplicação em: ***application.properties***.
 
 ## 🛠️ Construído com
