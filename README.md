@@ -21,6 +21,7 @@ De que coisas você precisa para instalar o software e como instalá-lo?
 - Banco de dados MySQL
 - IDE para inicializar o projeto
 - Um usuário ADMIN
+- O Sistema ainda funciona apenas no http://localhost:8080
 ```
 
 ### 🔧 Instalação
