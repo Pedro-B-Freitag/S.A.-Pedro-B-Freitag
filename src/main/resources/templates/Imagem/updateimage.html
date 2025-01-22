@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Add Image</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <style>
+
+        body {
+          margin: 0;
+          font-family: Arial, Helvetica, sans-serif;
+          background-color: #CAF0F8;
+        }
+
+        .error-message {
+            color: red;
+            font-weight: bold;
+        }
+
+        .line-text {
+            color: #030455;
+            font-family: 'SF Compact Display';
+            font-weight: bold;
+            text-align: center;
+            font-size: 80px;
+            margin-top: 60px;
+            margin-bottom: 100px;
+        }
+
+        .btn{
+        	background-color: #030455;
+        	color: white;
+        }
+
+  </style>
+</head>
+<body>
+<!-- Main Content -->
+<div class="my-5">
+  <div class="mx-auto w-25 " style="max-width:100%;">
+    <h2 class="text-center mb-3">Add Image</h2>
+
+
+
+    <form th:action="@{/cursos/updateImage(cursoid=${param.cursoid})}" method="post" enctype="multipart/form-data"
+          onsubmit="return validateImageUpload()">
+
+      <input type="hidden" id="cursoid" name="cursoid" th:value="${param.cursoid}" />
+
+      <div class="input-group">
+        <input type="file" class="form-control" id="imagem" name="imagem"
+               aria-describedby="inputGroupFileAddon04" aria-label="Upload" required="required">
+
+
+        <button class="btn btn-outline-secondary" >Submit</button>
+
+      </div>
+    </form>
+  </div>
+</div>
+<!-- Mensagem de erro -->
+<p class="error-message" id="errorMessage"></p>
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+        crossorigin="anonymous"></script>
+<script>
+    function validateImageUpload() {
+        var fileInput = document.getElementById('imagem');
+        var file = fileInput.files[0];
+
+        if (!file) {
+            displayErrorMessage('Please choose an image before uploading.');
+            return false;
+        }
+
+        // Simulate a data truncation error
+        var maxSizeInBytes = 64 * 1024; // Adjust this value based on your maximum allowed file size
+        if (file.size > maxSizeInBytes) {
+            displayErrorMessage('O tamanho da sua imagem excede o tamanho permitido de 64KB.');
+            return false;
+        }
+
+        // If everything is successful, clear the error message
+        clearErrorMessage();
+        return true;
+    }
+
+    function displayErrorMessage(message) {
+        var errorMessageElement = document.getElementById('errorMessage');
+        errorMessageElement.textContent = message;
+    }
+
+    function clearErrorMessage() {
+        var errorMessageElement = document.getElementById('errorMessage');
+        errorMessageElement.textContent = '';
+    }
+</script>
+</body>
+</html>

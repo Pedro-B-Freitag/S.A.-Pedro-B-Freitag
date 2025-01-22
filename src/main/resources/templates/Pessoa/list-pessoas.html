@@ -1,0 +1,147 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="https://fonts.cdnfonts.com/css/sf-compact-display" rel="stylesheet">
+
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #CAF0F8;
+        }
+
+        .main {
+
+            font-size: 20px;
+            width: 100%;
+            margin-left: 10px;
+        }
+
+        .topnav {
+            position: fixed;
+            width: 100%;
+            overflow: hidden;
+            background-color: #CAF0F8;
+            box-shadow: 4px 4px 8px 4px rgba(0, 0, 0, 0.2);
+            z-index: 2; /* Set a higher value for z-index */
+        }
+
+        .topnav a {
+            float: left;
+            color: #000000;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+
+        .topnav a:hover {
+            background-color: #90E0EF;
+            color: black;
+        }
+
+        .topnav a.active {
+            background-color: #0077B6;
+            color: white;
+        }
+
+        .topnav a.split {
+            float: right;
+            background-color: #030455;
+            color: white;
+        }
+        .btn{
+        	background-color: #030455;
+        	color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="topnav">
+    <a href="/home"> <i class="fa fa-fw fa-home"></i></a>
+    <a href="/cursos/list">Cursos</a>
+    <div sec:authorize="hasRole('ROLE_ADMIN')">
+        <a href="/empresas/list">Empresas</a>
+    </div>
+    <div sec:authorize="hasRole('ROLE_ADMIN')">
+        <a href="/pessoas/list">Pessoas</a>
+    </div>
+    <a href="/vagas/list">Vagas de Emprego</a>
+    <div sec:authorize="isAnonymous()">
+        <a href="/fancy-login" class="split">Login</a>
+    </div>
+</div>
+
+<div class = "main">
+<title>Pessoa Directory</title>
+
+<div class="container">
+
+    <h3>Pessoa Directory</h3>
+    <hr>
+
+
+    <a th:href="@{/pessoas/mostrarFormCadastrarPessoa}"
+       class="btn bnt-primary btn-sm mb-3">
+        Adicionar Pessoa
+    </a>
+
+
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+        <tr>
+            <th>id</th>
+            <th>Email</th>
+            <th>Senha </th>
+            <th>ACOES</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="tempPessoa : ${usuario}">
+
+            <td th:text="${tempPessoa.id}" />
+            <td th:text="${tempPessoa.email}" />
+            <td th:text="${tempPessoa.senha}" />
+
+            <td>
+                <a th:href="@{/pessoas/mostrarFormAtualizarPessoa(usuarioid=${tempPessoa.Id})}"
+                   class="btn btn-info btn-sm">
+
+                    Update
+                </a>
+
+                <a th:href="@{/pessoas/deletar(usuarioid=${tempPessoa.Id})}"
+                   class="btn btn-danger btn-sm"
+                   onclick="if(!(confirm('tem certeza que deseja excluir?'))) return false">
+                    Deletar
+                </a>
+            </td>
+
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</div>
+</body>
+</html>
