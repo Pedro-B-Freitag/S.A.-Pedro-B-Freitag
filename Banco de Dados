@@ -1,0 +1,108 @@
+CREATE TABLE `curso` (
+  `curso_id` int NOT NULL AUTO_INCREMENT,
+  `curso_descricao` varchar(255) DEFAULT NULL,
+  `curso_categoria` varchar(255) DEFAULT NULL,
+  `curso_fornecedor` varchar(255) DEFAULT NULL,
+  `curso_nome` varchar(255) DEFAULT NULL,
+  `curso_url` varchar(255) NOT NULL,
+  `curso_presencial` varchar(255) DEFAULT NULL,
+  `curso_visualizacao` int DEFAULT NULL,
+  `curso_gostei` int DEFAULT NULL,
+  `curso_qtd_hrs` varchar(255) DEFAULT NULL,
+  `curso_imagem` mediumblob,
+  PRIMARY KEY (`curso_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+CREATE TABLE `empresa` (
+  `empresa_id` int NOT NULL AUTO_INCREMENT,
+  `empresa_cnpj` varchar(255) NOT NULL,
+  `empresa_nome` varchar(255) NOT NULL,
+  `empresa_cep` varchar(255) DEFAULT NULL,
+  `empresa_uf` varchar(255) DEFAULT NULL,
+  `empresa_cidade` varchar(255) DEFAULT NULL,
+  `empresa_endereco` varchar(255) DEFAULT NULL,
+  `empresa_email` varchar(255) DEFAULT NULL,
+  `empresa_contato` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`empresa_cnpj`),
+  UNIQUE KEY `empresa_id` (`empresa_id`),
+  UNIQUE KEY `empresa_nome` (`empresa_nome`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+CREATE TABLE `roles` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `role` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+CREATE TABLE `usuarios` (
+  `usuario_id` int NOT NULL AUTO_INCREMENT,
+  `usuario_cpf` varchar(255) DEFAULT NULL,
+  `usuario_email` varchar(255) DEFAULT NULL,
+  `usuario_senha` varchar(255) DEFAULT NULL,
+  `usuario_ativado` int DEFAULT NULL,
+  `roles_id` int DEFAULT NULL,
+  PRIMARY KEY (`usuario_id`),
+  KEY `fk_usuarios_roles` (`roles_id`),
+  CONSTRAINT `fk_usuarios_roles` FOREIGN KEY (`roles_id`) REFERENCES `roles` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+CREATE TABLE `vaga` (
+  `empresa_nome` varchar(255) NOT NULL,
+  `vaga_descricao` varchar(255) DEFAULT NULL,
+  `vaga_cargo` varchar(255) DEFAULT NULL,
+  `vaga_data_vaga` varchar(255) DEFAULT NULL,
+  `vaga_data_prazo` varchar(255) DEFAULT NULL,
+  `vaga_categoria` varchar(255) DEFAULT NULL,
+  `vaga_quantidade` varchar(255) DEFAULT NULL,
+  `vaga_url` varchar(255) NOT NULL,
+  `vaga_id` int NOT NULL AUTO_INCREMENT,
+  UNIQUE KEY `vaga_id` (`vaga_id`),
+  KEY `fk_nova_vaga_empresa` (`empresa_nome`),
+  CONSTRAINT `fk_nova_vaga_empresa` FOREIGN KEY (`empresa_nome`) REFERENCES `empresa` (`empresa_nome`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci
+
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `cursos`.`before_usuarios_insert`
+BEFORE INSERT ON `cursos`.`usuarios`
+FOR EACH ROW
+BEGIN
+ IF NEW.usuario_ativado IS NULL THEN
+   SET NEW.usuario_ativado = 1;
+ END IF;
+END
+
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `cursos`.`before_usuarios_inserts`
+BEFORE INSERT ON `cursos`.`usuarios`
+FOR EACH ROW
+BEGIN
+ IF NEW.roles_id IS NULL THEN
+   -- Select the latest inserted id from the roles table
+   SET NEW.roles_id = 1;
+ END IF;
+END
+
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `cursos`.`before_usuarios_update`
+BEFORE UPDATE ON `cursos`.`usuarios`
+FOR EACH ROW
+BEGIN
+    IF NEW.roles_id IS NULL THEN
+        -- Select the latest inserted id from the roles table
+        SET NEW.roles_id = 1;
+    END IF;
+END
+
+CREATE
+DEFINER=`root`@`localhost`
+TRIGGER `cursos`.`before_usuarios_updates`
+BEFORE UPDATE ON `cursos`.`usuarios`
+FOR EACH ROW
+BEGIN
+    IF NEW.usuario_ativado IS NULL THEN
+        SET NEW.usuario_ativado = 1;
+    END IF;
+END
